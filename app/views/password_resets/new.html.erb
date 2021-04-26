@@ -1,0 +1,21 @@
+<% provide(:title, "Forget password") %>
+<h1>Forget password</h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <!--password_resetはUserモデルに変更を加えるコントローラのため
+    インスタンス変数を使う場合
+    model:@user
+    になる。
+    しかし、form_withに@userを使うと/usersに対応するPOST
+    であると認識されるのでsignupに対応してしまう。
+    なので、scope: :password_resetで指定してしている。-->
+    <%= form_with(url: password_resets_path, scope: :password_reset,
+                  local: true) do |f| %>
+      <%=f.label :email%>
+      <%=f.email_field :email, class: 'form-control' %>
+      
+      <%= f.submit "Submit", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>
